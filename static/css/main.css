@@ -1,0 +1,27 @@
+.container {
+    position: absolute;
+    top: 30%;
+}
+
+.form-control {
+}
+
+.sample-label {
+    height: 10%;
+    width: 100%;
+    margin: 2%;
+    text-align: center;
+    background-color: #f7f6dc;
+    border-radius: 15px;
+    cursor: default;
+    font-size: 1em;
+}
+
+.log {
+    margin: 1%;
+}
+.submit-btn {
+    margin-top: 1%;
+    display: inline-block;
+    position: absolute;
+}
