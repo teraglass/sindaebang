@@ -4,3 +4,6 @@ Scripts/
 share/
 testfiles/
 *.cfg
+.idea/
+__pycache__/
+*.pyc

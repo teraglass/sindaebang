@@ -70,7 +70,7 @@ def predict():
     global scaler
     if request.method == 'POST':
         file = request.files['file']
-        lead_time = request.values['leadtime']
+        lead_time = request.values['lead_time']
         print(lead_time)
         model = tf.keras.models.load_model(os.path.join(model_path, lead_time))
 
