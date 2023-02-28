@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col"></div>
         <div class="col">
-            <h3>Sindaebang</h3><br/>
+            <h3>Inference</h3><br/>
             <form name="frm" action="/predict" method="POST" enctype="multipart/form-data">
                 <label class="sample-label right">csv 파일을 선택해 주세요</label>
                 <input type="file"
@@ -20,17 +20,10 @@
                        class="form-control"
                        accept=text/csv
                        required>
-                <label class="sample-label right">Please Choose Model</label>
+                <label class="sample-label right">choose lead time</label>
                 <div>
-                    <select name="lead_time" onchange="changeValue(this)">
-                    <option value="0.5h">WL_sindaebang_case07_single_after_0.5h_drop-out_0_seq_length_24</option>
-                    <option value="1h">WL_sindaebang_case07_single_after_1h_drop-out_0_seq_length_24</option>
-                    <option value="2h">WL_sindaebang_case07_single_after_2h_drop-out_0_seq_length_24</option>
-                    <option value="3h">WL_sindaebang_case07_single_after_3h_drop-out_0_seq_length_24</option>
-                    <option value="4h">WL_sindaebang_case07_single_after_4h_drop-out_0_seq_length_24</option>
-                    <option value="5h">WL_sindaebang_case07_single_after_5h_drop-out_0_seq_length_24</option>
-                    <option value="6h">WL_sindaebang_case07_single_after_6h_drop-out_0_seq_length_24</option>
-                    <option value="timeseries">WL_sindaebang_case07_timeseries_drop-out_0_seq_length_24</option>
+                    <select name="leadtime" onchange="changeValue(this)">
+                    <option value="WL_sindaebang_case07_timeseries_after_timeseries_drop-out_0_seq_length_24">WL_sindaebang_case07_timeseries_after_timeseries_drop-out_0_seq_length_24</option>
                 </select>
                 </div>
                 <br/>

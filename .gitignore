@@ -1,2 +1,6 @@
-.idea/
-./Scripts/
+# created by virtualenv automatically
+Lib/
+Scripts/
+share/
+testfiles/
+*.cfg
