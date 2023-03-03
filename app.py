@@ -58,8 +58,11 @@ for i in range(0, len(Predict_time_leadtime)):
     Predict_time[Predict_time_index[i]] = pd.DatetimeIndex(Current_time_test['Date']) + timedelta(minutes=Predict_time_leadtime[i])
 
 # data normalize of training data
-scaler = MinMaxScaler()
-data_training_scale = scaler.fit_transform(data_training_drop)
+ft_scaler = MinMaxScaler() # feature scaling
+ft_scaler.fit_transform(data_training_drop.iloc[:,:-7])
+
+tg_scaler = MinMaxScaler() # target scaling
+tg_scaler.fit_transform(data_training_drop.iloc[:,-7:])
 
 @app.route('/')
 def index():  # put application's code here
@@ -79,12 +82,15 @@ def predict():
             file_bytes = file.read()
             df = pd.read_csv(io.BytesIO(file_bytes),
                              infer_datetime_format=True, header=None)
-            y_test = scaler.transform(df)
-            y_test = y_test[:,:14]
-            y_test = np.array(y_test).reshape(-1, 24, 14)
+            df = df.iloc[:, 1:]
+            # normalization
+            y_test = ft_scaler.fit_transform(df)
+            y_test = np.array(y_test).reshape(-1, seq_length, data_dim)
+            # predict
             y_pred = model.predict(y_test)
-            dn = y_pred * scaler.data_range_[-1] + scaler.data_min_[-1]
-            # dn = dn.flatten().reshape(-1, 1)
+            print(y_pred.shape)
+            # denormalization
+            dn = tg_scaler.inverse_transform(y_pred)
             dn = pd.DataFrame(dn)
             output_stream = io.StringIO()
             dn.to_csv(output_stream, index=False, header=False)
