@@ -80,13 +80,14 @@ def predict():
             df = pd.read_csv(io.BytesIO(file_bytes),
                              infer_datetime_format=True, header=None)
             df = df.iloc[:, 1:]
-            # normalization
+            ##### normalization
             y_test = (df - scaler.data_min_[-1]) / (scaler.data_range_[-1] - scaler.data_min_[-1])
+            # change dimension
             y_test = np.array(y_test).reshape(-1, seq_length, data_dim)
-            print(y_test.shape)
+            # prediction
             y_pred = model.predict(y_test)
+            ##### denormalization
             dn = y_pred * scaler.data_range_[-1] + scaler.data_min_[-1]
-            # dn = dn.flatten().reshape(-1, 1)
             dn = pd.DataFrame(dn)
             output_stream = io.StringIO()
             dn.to_csv(output_stream, index=False, header=False)
